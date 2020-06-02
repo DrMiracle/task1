@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Faculty {
 	private String name;
 	private Cathedra[] cathedras = {};
@@ -7,6 +5,10 @@ public class Faculty {
 	public Faculty(String name) {
 		super();
 		this.name = name;
+	}
+
+	public Cathedra[] getCathedras() {
+		return cathedras;
 	}
 
 	public String getName() {
@@ -18,6 +20,12 @@ public class Faculty {
 	}
 
 	public void addCathedra(Cathedra cathedra) {
+		for (Cathedra c : cathedras) {
+			if (c.getName().equals(cathedra.getName())) {
+				System.out.println("Cathedra with name" + c.getName() + " already exist");
+				return;
+			}
+		}
 		Cathedra[] temp = new Cathedra[cathedras.length + 1];
 		System.arraycopy(cathedras, 0, temp, 0, cathedras.length);
 		temp[cathedras.length] = cathedra;
@@ -45,14 +53,13 @@ public class Faculty {
 		for (int i = 0, k = 0; i < cathedras.length; i++) {
 
 			if (cathedras[i].equals(cathedra)) {
-				System.out.println("Cathedra " + cathedra + " was succesfully deleted");
+				System.out.println("Cathedra " + cathedraName + " was succesfully deleted");
 				continue;
 
 			}
 			temp[k++] = cathedras[i];
 		}
 		cathedras = temp;
-		System.out.println(Arrays.toString(cathedras));
 
 	}
 
@@ -65,13 +72,14 @@ public class Faculty {
 		return null;
 	}
 
-	public void printAllCathedras() {
+	public boolean printAllCathedras() {
 		if (cathedras.length != 0) {
 			System.out.println("Cathedras: ");
 		}
 		for (int i = 0; i < cathedras.length; i++) {
 			System.out.println(i + 1 + ". " + cathedras[i].getName());
 		}
+		return cathedras.length > 0;
 	}
 
 }

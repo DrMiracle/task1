@@ -55,9 +55,13 @@ public final class DataInput {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Integer value = Integer.valueOf(s);
-		return value;
 
+		try {
+			Integer value = Integer.valueOf(s);
+			return value;
+		} catch (NumberFormatException e) {
+			return getInt("Invalid number! Please enter a number: ");
+		}
 	}
 
 	public static String getString(String str)
